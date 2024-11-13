@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../service/usersService';
+import { signInUser } from '../../../service/usersService';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
-import { AnyAction } from 'redux'; 
+import { AnyAction } from 'redux';
 
-const Login = () => {
-    
+const Register = () => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    
+
     const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
-    
-    const handleLogin = async (e: React.FormEvent) => {
+
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!username || !password) {
@@ -22,26 +22,26 @@ const Login = () => {
         }
 
         try {
-            const loginData = { username, password };
-            const resultAction = await dispatch(loginUser(loginData));
+            const RegisterDate = { username, password };
+            const resultAction = await dispatch(signInUser(RegisterDate));
 
-            if (loginUser.fulfilled.match(resultAction)) {
-                console.log('Logged in successfully');
+            if (signInUser.fulfilled.match(resultAction)) {
+                console.log('registered in successfully');
                 setPassword('')
                 setUsername('')
                 setError('')
             } else {
-                setError(resultAction.payload as string || 'Login failed');
+                setError('Login failed');
             }
         } catch (err: any) {
-            setError(err.message || 'Login failed');
+            setError(err.message || 'Register failed');
         }
     };
 
     return (
-        <div className='Login'>
-            <h2>Login</h2> 
-            <form onSubmit={handleLogin}>
+        <div className='Register'>
+            <h2>Register</h2>
+            <form onSubmit={handleRegister}>
                 <input
                     type="text"
                     placeholder="Username"
@@ -54,11 +54,11 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <input type="submit" value="Login" />
+                <input type="submit" value="Sign in" />
             </form>
             {error && <p className="error">{error}</p>}
         </div>
-    )
+    );
 }
 
-export default Login;
+    export default Register;
