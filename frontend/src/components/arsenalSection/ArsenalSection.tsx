@@ -1,12 +1,32 @@
-import React from 'react';
-import { RootState } from "../../app/store";
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { fetchArsenal } from '../../service/dashboardService';
+import { ThunkDispatch } from '@reduxjs/toolkit';
+import { RootState } from '../../app/store';
+import { AnyAction } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 const ArsenalSection = () => {
-    const arsenal = useSelector((state: RootState) => state.arsenal.arsenal);
+  const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
+  const { arsenal, status, error } = useSelector((state: RootState) => state.arsenal);
 
-    return (
-        <section>
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchArsenal());
+    }
+  }, [status, dispatch]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <>
+      <h1>Organization {arsenal?.organization.name}</h1>
+      <section>
         <h2>Missiles</h2>
         <div className="missiles-container">
           {arsenal?.organization.resources && arsenal?.organization.resources.length > 0 ? (
@@ -21,7 +41,8 @@ const ArsenalSection = () => {
           )}
         </div>
       </section>
-    )
+    </>
+  )
 }
 
 export default ArsenalSection

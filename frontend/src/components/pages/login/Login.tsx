@@ -34,7 +34,6 @@ const Login: React.FC = () => {
                 setError('')
                 const navigation:string = navigateToDashboard(resultAction.payload.user);
                 navigate(`/${navigation}`);
-                
             } else {
                 setError(resultAction.payload as string || 'Login failed');
             }

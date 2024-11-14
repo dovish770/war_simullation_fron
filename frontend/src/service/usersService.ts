@@ -11,7 +11,7 @@ export const loginUser = createAsyncThunk<LoginResponse, LoginData, { rejectValu
     'user/login',
     async (loginData, { rejectWithValue }) => {
         try {
-            const response = await axios.post<LoginResponse>(`${BASE_URL}/login`, loginData);
+            const response = await axios.post<LoginResponse>(`${BASE_URL}/war_simulation/login`, loginData);
             const token = response.data.token
             if (token) {
                 localStorage.setItem('Token', token);
@@ -25,7 +25,7 @@ export const loginUser = createAsyncThunk<LoginResponse, LoginData, { rejectValu
 
 export const signInUser = createAsyncThunk<signInResponse, signInData, { rejectValue: string }>('user/signIn', async (registerData, { rejectWithValue })=>{
     try {
-        const response = await axios.post<signInResponse>(`${BASE_URL}/signIn`, registerData);
+        const response = await axios.post<signInResponse>(`${BASE_URL}/war_simulation/signIn`, registerData);
         return response.data;
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || 'signIn failed');

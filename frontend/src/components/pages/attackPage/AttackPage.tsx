@@ -6,19 +6,25 @@ import { ThunkDispatch } from '@reduxjs/toolkit';
 import { AnyAction } from 'redux';
 import './AttackPage.css'
 import ArsenalSection from '../../arsenalSection/ArsenalSection';
+import { logout } from '../../../features/users/usersSlice';
+import { useNavigate } from 'react-router-dom';
+
 const AttackPage: React.FC = () => {
 
   const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
   const { arsenal, status, error } = useSelector((state: RootState) => state.arsenal);
-
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (status === 'idle') {
       dispatch(fetchArsenal());
     }
   }, [status, dispatch]);
 
-  
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
+
   if (status === 'loading') {
     return <div>Loading...</div>;
   }
@@ -26,10 +32,10 @@ const AttackPage: React.FC = () => {
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
-  
+
   return (
     <div className="attack-page">
-      <h1>Organization {arsenal?.organization.name}</h1>
+      <ArsenalSection />
       <section>
         <h2>Locations</h2>
         <select className="locations-select">
@@ -37,7 +43,7 @@ const AttackPage: React.FC = () => {
             arsenal.locations.map((location, index) => (
               <option key={index} value={location}>
                 {location}
-              </option>              
+              </option>
             ))
           ) : (
             <option disabled>No locations available</option>
@@ -45,7 +51,9 @@ const AttackPage: React.FC = () => {
         </select>
       </section>
 
-      <ArsenalSection/>
+      <button onClick={handleLogout} className="logout-button">
+        Logout
+      </button>
     </div>
   );
 };

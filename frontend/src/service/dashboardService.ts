@@ -11,7 +11,7 @@ export const fetchArsenal = createAsyncThunk<ArsenalResponse, void, { rejectValu
         try {
             const token = localStorage.getItem('Token');
             
-            const response = await axios.get(`${BASE_URL}/arsenal`, {
+            const response = await axios.get(`${BASE_URL}/war_simulation/arsenal`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
