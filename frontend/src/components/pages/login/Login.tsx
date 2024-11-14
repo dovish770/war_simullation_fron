@@ -4,6 +4,7 @@ import { loginUser } from '../../../service/usersService';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
 import { AnyAction } from 'redux'; 
+import { Link } from 'react-router-dom';
 
 const Login = () => {
     
@@ -56,6 +57,7 @@ const Login = () => {
                 />
                 <input type="submit" value="Login" />
             </form>
+            <Link to="/signin">Sign In</Link>
             {error && <p className="error">{error}</p>}
         </div>
     )

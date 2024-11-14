@@ -1,5 +1,5 @@
 import { LoginData, LoginResponse } from '../types/serverTypes/LoginTypes'
-import { signInResponse, signInData } from '../types/serverTypes/signInTypes'
+import { signInResponse, signInData } from '../types/serverTypes/SigninTypes'
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
