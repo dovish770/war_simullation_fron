@@ -12,7 +12,8 @@ export const areaRules: {[key:string]: [string,string]} = {
     "Houthis": ["west bank", "south"]
 }
 
-export const organizations = ["idf", "Hezbollah", "Hamas", "IRGC", "Houthis"];
+export const organizations = ["IDF", "Hezbollah", "Hamas", "IRGC", "Houthis"];
+
 export const regions = ["North", "South", "Center", "West Bank"];
 
 export default area_dict

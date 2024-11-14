@@ -8,7 +8,7 @@ import { organizations, regions } from '../../../types/modelTypes/objects';
 import { useNavigate, Link } from 'react-router-dom';
 
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -61,7 +61,7 @@ const SignIn = () => {
                         <option key={org} value={org}>{org}</option>
                     ))}
                 </select>
-                {organization === "idf" && (
+                {organization === "IDF" && (
                     <select value={region} onChange={(e) => setRegion(e.target.value)}>
                         <option value="">Select Region</option>
                         {regions.map(reg => (

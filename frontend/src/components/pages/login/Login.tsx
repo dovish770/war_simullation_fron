@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../service/usersService';
+import { loginUser, navigateToDashboard } from '../../../service/usersService';
 import { ThunkDispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../../app/store';
 import { AnyAction } from 'redux'; 
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-const Login = () => {
+const Login: React.FC = () => {
     
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     
     const dispatch: ThunkDispatch<RootState, unknown, AnyAction> = useDispatch();
-    
+    const navigate = useNavigate();
+
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -31,6 +32,9 @@ const Login = () => {
                 setPassword('')
                 setUsername('')
                 setError('')
+                const navigation:string = navigateToDashboard(resultAction.payload.user);
+                navigate(`/${navigation}`);
+                
             } else {
                 setError(resultAction.payload as string || 'Login failed');
             }

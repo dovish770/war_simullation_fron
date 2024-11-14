@@ -2,6 +2,7 @@ import { LoginData, LoginResponse } from '../types/serverTypes/LoginTypes'
 import { signInResponse, signInData } from '../types/serverTypes/SigninTypes'
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
+import IUser from '../types/modelTypes/user';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -30,4 +31,10 @@ export const signInUser = createAsyncThunk<signInResponse, signInData, { rejectV
         return rejectWithValue(error.response?.data?.message || 'signIn failed');
     }
 })
+
+export const navigateToDashboard = (user:IUser):string=> {   
+    return user.isDefence? "defence" : "attack"
+}
+
+
 

@@ -1,0 +1,42 @@
+.attack-page {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Locations - select */
+  .locations-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+  }
+  
+  /* סטייל עבור האזור שמציג את הטילים */
+  .missiles-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* סטייל עבור כל פריט טיל */
+  .missile-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: auto;
+    background-color: #f9f9f9;
+  }
+  
+  /* סטייל עבור שם הטיל */
+  .missile-name {
+    font-weight: bold;
+  }
+  
+  /* סטייל עבור כמות הטיל */
+  .missile-amount {
+    font-size: 14px;
+    color: #333;
+  }

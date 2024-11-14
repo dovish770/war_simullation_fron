@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../features/users/usersSlice';
+import ArsenalReducer from '../features/dashboard/DashboardSlice';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-
+    arsenal: ArsenalReducer
   }
 });
 
